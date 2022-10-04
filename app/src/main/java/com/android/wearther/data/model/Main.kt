@@ -1,4 +1,4 @@
-package com.android.wearther.data
+package com.android.wearther.data.model
 
 data class Main(
     val feels_like: Double,

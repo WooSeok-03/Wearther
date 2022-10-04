@@ -1,4 +1,4 @@
-package com.android.wearther.data
+package com.android.wearther.data.model
 
 data class Weather(
     val base: String,
