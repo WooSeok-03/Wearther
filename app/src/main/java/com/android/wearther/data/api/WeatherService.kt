@@ -11,8 +11,10 @@ import retrofit2.http.Query
 
 interface WeatherService {
     @GET("weather?")
-    suspend fun getCurrentWeather(
-        @Query("id") city: String,
+    fun getCurrentWeather(
+        @Query("id") city: String = "1835841",      // Republic of Korea
+        @Query("units") units: String = "metric",   // 국제 표준 단위
         @Query("appid") appid: String = BuildConfig.API_KEY
-    ): Call<JsonObject>
+    ): Call<Weather>
+
 }
