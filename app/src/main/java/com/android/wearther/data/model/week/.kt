@@ -1,6 +1,6 @@
 package com.android.wearther.data.model.week
 
-data class (
+data class Week(
     val clouds: Clouds,
     val dt: Int,
     val dt_txt: String,

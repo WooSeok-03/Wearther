@@ -1,11 +1,9 @@
 package com.android.wearther.data.api
 
 import com.android.wearther.BuildConfig
-import com.android.wearther.data.model.Weather
-import com.android.wearther.data.model.WeatherX
-import com.google.gson.JsonObject
+import com.android.wearther.data.model.current.Weather
+import com.android.wearther.data.model.week.WeekWeather
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -17,4 +15,10 @@ interface WeatherService {
         @Query("appid") appid: String = BuildConfig.API_KEY
     ): Call<Weather>
 
+    @GET("forecast?")
+    fun getForecastWeather(
+        @Query("q") city: String = "Seoul",
+        @Query("units") units: String = "metric",
+        @Query("appid") appid: String = BuildConfig.API_KEY
+    ): Call<WeekWeather>
 }

@@ -1,4 +1,4 @@
-package com.android.wearther.data.model
+package com.android.wearther.data.model.current
 
 data class Coord(
     val lat: Int,

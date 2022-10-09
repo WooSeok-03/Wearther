@@ -4,6 +4,6 @@ data class WeekWeather(
     val city: City,
     val cnt: Int,
     val cod: String,
-    val list: List<>,
+    val list: List<Week>,
     val message: Int
 )

@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showTemperature() {
         viewModel.getCurrentWeather()
+        viewModel.getWeekWeather()
 
         viewModel.temperature.observe(this, Observer {
             binding.temperature.text = it
