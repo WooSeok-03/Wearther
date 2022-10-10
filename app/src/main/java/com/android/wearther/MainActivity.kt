@@ -2,37 +2,30 @@ package com.android.wearther
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.android.wearther.databinding.ActivityMainBinding
+import com.android.wearther.presentation.ForecastViewModel
 import com.android.wearther.presentation.WeatherViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    lateinit var viewModel: WeatherViewModel
+    lateinit var weatherViewModel: WeatherViewModel
+    lateinit var forecastViewModel: ForecastViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this).get(WeatherViewModel::class.java)
-        showTemperature()
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        binding.bnvMenu.setupWithNavController(navController)
+
+        weatherViewModel = ViewModelProvider(this).get(WeatherViewModel::class.java)
+        forecastViewModel = ViewModelProvider(this).get(ForecastViewModel::class.java)
     }
 
-    private fun showTemperature() {
-        viewModel.getCurrentWeather()
-        viewModel.getWeekWeather()
 
-        viewModel.temperature.observe(this, Observer {
-            binding.temperature.text = it
-        })
-        viewModel.maxTemperature.observe(this, Observer {
-            binding.maxTemperature.text = it
-        })
-        viewModel.minTemperature.observe(this, Observer {
-            binding.minTemperature.text = it
-        })
-    }
 }
