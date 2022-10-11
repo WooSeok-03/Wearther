@@ -1,4 +1,4 @@
-package com.android.wearther.presentation
+package com.android.wearther.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -17,7 +17,15 @@ class WeatherViewModel: ViewModel(){
 
     var weatherData = MutableLiveData<String>()
     val weather: LiveData<String>
-        get() = weatherData
+    get() = weatherData
+
+    var humidityData = MutableLiveData<String>()
+    val humidity : LiveData<String>
+    get() = humidityData
+
+    var windData = MutableLiveData<String>()
+    val wind : LiveData<String>
+    get() = windData
 
     fun getCurrentWeather() {
         val service = getApiService()
@@ -28,7 +36,7 @@ class WeatherViewModel: ViewModel(){
                 if(response.code() == 200) {
                     Log.i("MYTAG", "response.body : ${response.body()}")
 
-                    val temperatureValue: Double = response.body()?.main?.temp_max ?: 0.0
+                    // Current Weather
                     val weatherList = response.body()?.weather
                     if (weatherList != null) {
                         Log.i("MYTAG", "$weatherList")
@@ -36,7 +44,17 @@ class WeatherViewModel: ViewModel(){
                         weatherData.postValue(weatherState)
                     }
 
+                    // Current Temperature
+                    val temperatureValue: Double = response.body()?.main?.temp_max ?: 0.0
                     temperatureData.postValue(temperatureValue.roundToInt().toString() + " ℃")
+
+                    // Current Humidity
+                    val humidityValue = response.body()?.main?.humidity
+                    humidityData.postValue(humidityValue.toString() + "%")
+
+                    // Current Wind
+                    val windValue = response.body()?.wind?.speed
+                    windData.postValue(windValue.toString() + "m/s")
 
                 } else {
                     Log.i("MYTAG", "Error : $response")

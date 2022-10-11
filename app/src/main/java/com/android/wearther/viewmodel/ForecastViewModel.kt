@@ -1,4 +1,4 @@
-package com.android.wearther.presentation
+package com.android.wearther.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.android.wearther.databinding.ActivityMainBinding
-import com.android.wearther.presentation.ForecastViewModel
-import com.android.wearther.presentation.WeatherViewModel
+import com.android.wearther.viewmodel.ForecastViewModel
+import com.android.wearther.viewmodel.WeatherViewModel
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding

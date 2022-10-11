@@ -1,4 +1,4 @@
-package com.android.wearther
+package com.android.wearther.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import com.android.wearther.MainActivity
+import com.android.wearther.R
 import com.android.wearther.databinding.FragmentWeatherBinding
 import com.android.wearther.viewmodel.WeatherViewModel
 
@@ -31,12 +33,10 @@ class WeatherFragment : Fragment() {
     private fun showTemperature() {
         viewModel.getCurrentWeather()
 
-        viewModel.weather.observe(viewLifecycleOwner) {
-            binding.weather.text = it
-        }
-        viewModel.temperature.observe(viewLifecycleOwner, Observer {
-            binding.temperature.text = it
-        })
+        viewModel.weather.observe(viewLifecycleOwner) { binding.weather.text = it }
+        viewModel.temperature.observe(viewLifecycleOwner) { binding.temperature.text = it }
+        viewModel.humidity.observe(viewLifecycleOwner) { binding.humidity.text = it }
+        viewModel.wind.observe(viewLifecycleOwner) { binding.wind.text = it }
     }
 
 }
