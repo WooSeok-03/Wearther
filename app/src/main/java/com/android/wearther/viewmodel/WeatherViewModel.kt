@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.android.wearther.data.api.RetrofitClient.getApiService
+import com.android.wearther.data.api.RetrofitClient.Companion.getApiService
 import com.android.wearther.data.model.current.Weather
 import retrofit2.*
 import kotlin.math.roundToInt

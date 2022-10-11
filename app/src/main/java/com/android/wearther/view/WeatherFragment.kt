@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.android.wearther.databinding.FragmentWeatherBinding
-import com.android.wearther.presentation.WeatherViewModel
+import com.android.wearther.viewmodel.WeatherViewModel
 
 class WeatherFragment : Fragment() {
     lateinit var binding: FragmentWeatherBinding

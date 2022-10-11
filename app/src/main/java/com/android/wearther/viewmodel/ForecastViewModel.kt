@@ -2,7 +2,7 @@ package com.android.wearther.presentation
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.android.wearther.data.api.RetrofitClient.getApiService
+import com.android.wearther.data.api.RetrofitClient.Companion.getApiService
 import com.android.wearther.data.model.week.WeekWeather
 import retrofit2.Call
 import retrofit2.Callback

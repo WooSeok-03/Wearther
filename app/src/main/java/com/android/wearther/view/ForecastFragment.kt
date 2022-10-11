@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.android.wearther.databinding.FragmentForecastBinding
-import com.android.wearther.presentation.ForecastViewModel
+import com.android.wearther.viewmodel.ForecastViewModel
 
 class ForecastFragment : Fragment() {
     lateinit var binding: FragmentForecastBinding
