@@ -1,4 +1,4 @@
-package com.android.wearther.presentation
+package com.android.wearther
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -33,10 +33,10 @@ class WeatherFragment : Fragment() {
     private fun showCurrentWeather() {
         viewModel.getCurrentWeather()
 
-        viewModel.weather.observe(viewLifecycleOwner) { binding.weather.text = it }
-        viewModel.temperature.observe(viewLifecycleOwner) { binding.temperature.text = it }
-        viewModel.humidity.observe(viewLifecycleOwner) { binding.humidity.text = it }
-        viewModel.wind.observe(viewLifecycleOwner) { binding.wind.text = it }
+        viewModel.weather.observe(viewLifecycleOwner) { binding.tvWeather.text = it }
+        viewModel.temperature.observe(viewLifecycleOwner) { binding.tvTemperature.text = it }
+        viewModel.humidity.observe(viewLifecycleOwner) { binding.tvHumidity.text = it }
+        viewModel.wind.observe(viewLifecycleOwner) { binding.tvWind.text = it }
     }
 
 }
