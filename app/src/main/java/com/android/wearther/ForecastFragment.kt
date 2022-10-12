@@ -1,4 +1,4 @@
-package com.android.wearther.view
+package com.android.wearther.presentation
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.android.wearther.MainActivity
 import com.android.wearther.R
 import com.android.wearther.databinding.FragmentForecastBinding
-import com.android.wearther.viewmodel.ForecastViewModel
+import com.android.wearther.presentation.viewmodel.ForecastViewModel
 
 class ForecastFragment : Fragment() {
     lateinit var binding: FragmentForecastBinding
