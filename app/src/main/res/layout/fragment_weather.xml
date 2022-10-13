@@ -58,6 +58,19 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_humidity"
             tools:text="wind" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_wear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="24sp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_wind"
+            tools:text="wear" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -37,6 +37,7 @@ class WeatherFragment : Fragment() {
         viewModel.temperature.observe(viewLifecycleOwner) { binding.tvTemperature.text = it }
         viewModel.humidity.observe(viewLifecycleOwner) { binding.tvHumidity.text = it }
         viewModel.wind.observe(viewLifecycleOwner) { binding.tvWind.text = it }
+        viewModel.wear.observe(viewLifecycleOwner) { binding.tvWear.text = it}
     }
 
 }
