@@ -29,7 +29,7 @@ class ForecastViewModel: ViewModel() {
                 if (response.code() == 200) {
                     Log.i("MYTAG", "response.body : ${response.body()?.list}")
 
-                    var forecastList = mutableListOf<Week>()    // 대표 날씨 List
+                    val forecastList = mutableListOf<Week>()    // 대표 날씨 List
                     for(date in response.body()?.list!!) {
                         // 12시를 기준
                         if(date.dt_txt.contains("12:00:00")) {
