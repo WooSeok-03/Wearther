@@ -10,4 +10,9 @@
         android:id="@+id/forecastFragment"
         android:icon="@drawable/ic_baseline_wb_sunny_24"
         android:title="@string/week_weather" />
+
+    <item
+        android:id="@+id/wearFragment"
+        android:icon="@drawable/ic_baseline_wb_sunny_24"
+        android:title="@string/recommend_dress" />
 </menu>

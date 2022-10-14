@@ -15,4 +15,9 @@
         android:name="com.android.wearther.ForecastFragment"
         android:label="fragment_forecast"
         tools:layout="@layout/fragment_forecast" />
+    <fragment
+        android:id="@+id/wearFragment"
+        android:name="com.android.wearther.WearFragment"
+        android:label="fragment_wear"
+        tools:layout="@layout/fragment_wear" />
 </navigation>
