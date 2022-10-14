@@ -14,6 +14,10 @@ class WeatherInfoActivity : AppCompatActivity() {
         binding = ActivityWeatherInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        showWeatherInfo()
+    }
+
+    private fun showWeatherInfo() {
         val date = intent.getStringExtra("date")
         val weather = intent.getStringExtra("weather")
         val temperature = intent.getStringExtra("temperature")
@@ -23,7 +27,6 @@ class WeatherInfoActivity : AppCompatActivity() {
         binding.tvWeather.text = weather
         binding.tvTemperature.text = temperature
         binding.tvRecommend.text = recommend
-
     }
 
     private fun recommendDress(temperatureValue: String) : String {
