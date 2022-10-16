@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Wearther</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="current_weather">현재 날씨</string>
     <string name="week_weather">주간 날씨</string>

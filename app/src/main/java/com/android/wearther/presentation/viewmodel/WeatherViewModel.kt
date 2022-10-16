@@ -44,8 +44,8 @@ class WeatherViewModel: ViewModel(){
                     val weatherList = response.body()?.weather
                     if (weatherList != null) {
                         Log.i("MYTAG", "$weatherList")
-                        val weatherState = weatherList.first().main
-                        weatherData.postValue(weatherState)
+                        val weatherValue = weatherList.first().description
+                        weatherData.postValue(translateWeather(weatherValue))
                     }
 
                     // Current Temperature
@@ -72,6 +72,21 @@ class WeatherViewModel: ViewModel(){
                 Log.i("MYTAG", t.localizedMessage)
             }
         })
+    }
+
+    fun translateWeather(weather: String): String {
+        return when(weather) {
+            "clear sky" -> "맑음"
+            "few clouds" -> "구름조금"
+            "scattered clouds" -> "구름많음"
+            "broken clouds" -> "흐림"
+            "shower rain" -> "소나기"
+            "rain" -> "비"
+            "thunderstorm" -> "뇌우"
+            "snow" -> "눈"
+            "mist" -> "안개"
+            else -> ""
+        }
     }
 
     fun recommendDress(currentTemperature: Int) : String {
