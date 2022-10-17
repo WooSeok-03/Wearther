@@ -5,9 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import com.android.wearther.MainActivity
-import com.android.wearther.R
 import com.android.wearther.databinding.FragmentWeatherBinding
 import com.android.wearther.presentation.viewmodel.WeatherViewModel
 
