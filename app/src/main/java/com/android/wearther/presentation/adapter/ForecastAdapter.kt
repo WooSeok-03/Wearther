@@ -17,7 +17,7 @@ class ForecastAdapter: RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>(
             val date = week.dt_txt.replace(" 12:00:00", "")
             binding.tvDate.text = date
 
-            val weather = week.weather.first().description
+            val weather = week.weather.first().id
             binding.tvWeather.text = translateWeather(weather)
 
             val temperature = week.main.temp.roundToInt().toString() + " ℃"
@@ -26,7 +26,7 @@ class ForecastAdapter: RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>(
             binding.cardView.setOnClickListener{
                 val intent = Intent(it.context, WeatherInfoActivity::class.java)
                 intent.putExtra("date", date)
-                intent.putExtra("weather", weather)
+                intent.putExtra("weather", translateWeather(weather))
                 //intent.putExtra("temperature", week.main.temp.roundToInt())
                 intent.putExtra("temperature", temperature)
                 ContextCompat.startActivity(it.context, intent, null)
@@ -53,17 +53,17 @@ class ForecastAdapter: RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>(
         notifyDataSetChanged()
     }
 
-    fun translateWeather(weather: String): String {
-        return when(weather) {
-            "clear sky" -> "맑음"
-            "few clouds" -> "구름조금"
-            "scattered clouds" -> "구름많음"
-            "broken clouds" -> "흐림"
-            "shower rain" -> "소나기"
-            "rain" -> "비"
-            "thunderstorm" -> "뇌우"
-            "snow" -> "눈"
-            "mist" -> "안개"
+    fun translateWeather(weather: Int): String {
+        return when (weather) {
+            in 200..299 -> "뇌우"
+            in 300..499 -> "이슬비"
+            in 500..599 -> "비"
+            in 600..699 -> "눈"
+            in 701..799 -> "안개"
+            800 -> "맑음"
+            801 -> "구름조금"
+            802 -> "구름많음"
+            in 803..804 -> "흐림"
             else -> ""
         }
     }

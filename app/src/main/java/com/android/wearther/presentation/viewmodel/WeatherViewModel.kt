@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import com.android.wearther.data.api.RetrofitClient.Companion.getApiService
 import com.android.wearther.data.model.current.Weather
 import retrofit2.*
+import java.text.DateFormat
+import java.util.*
 import kotlin.math.roundToInt
 
 class WeatherViewModel: ViewModel(){
@@ -44,7 +46,7 @@ class WeatherViewModel: ViewModel(){
                     val weatherList = response.body()?.weather
                     if (weatherList != null) {
                         Log.i("MYTAG", "$weatherList")
-                        val weatherValue = weatherList.first().description
+                        val weatherValue = weatherList.first().id
                         weatherData.postValue(translateWeather(weatherValue))
                     }
 
@@ -63,6 +65,7 @@ class WeatherViewModel: ViewModel(){
                     val windValue = response.body()?.wind?.speed
                     windData.postValue(windValue.toString() + "m/s")
 
+
                 } else {
                     Log.i("MYTAG", "Error : $response")
                 }
@@ -74,17 +77,17 @@ class WeatherViewModel: ViewModel(){
         })
     }
 
-    fun translateWeather(weather: String): String {
-        return when(weather) {
-            "clear sky" -> "맑음"
-            "few clouds" -> "구름조금"
-            "scattered clouds" -> "구름많음"
-            "broken clouds" -> "흐림"
-            "shower rain" -> "소나기"
-            "rain" -> "비"
-            "thunderstorm" -> "뇌우"
-            "snow" -> "눈"
-            "mist" -> "안개"
+    fun translateWeather(weather: Int): String {
+        return when (weather) {
+            in 200..299 -> "뇌우"
+            in 300..499 -> "이슬비"
+            in 500..599 -> "비"
+            in 600..699 -> "눈"
+            in 701..799 -> "안개"
+            800 -> "맑음"
+            801 -> "구름조금"
+            802 -> "구름많음"
+            in 803..804 -> "흐림"
             else -> ""
         }
     }
