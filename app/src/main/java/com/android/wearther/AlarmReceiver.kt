@@ -19,10 +19,12 @@ class AlarmReceiver: BroadcastReceiver() {
         // NotificationManager 생성
         notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        val time = intent?.extras?.getString("time") ?: ""
+        val weather = intent?.extras?.getString("weather") ?: ""
+        val temperature = intent?.extras?.getString("temperature") ?: ""
+        val wear = intent?.extras?.getString("wear") ?: ""
 
         createChannel(context)
-        sendNotification(context, time)
+        sendNotification(context, weather, temperature, wear)
     }
 
     companion object {
@@ -43,11 +45,12 @@ class AlarmReceiver: BroadcastReceiver() {
         }
     }
 
-    private fun sendNotification(context: Context, time: String) {
+    private fun sendNotification(context: Context, weather: String, temperature: String, wear: String) {
+        val notificationTitle = "$weather : $temperature"
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_baseline_wb_sunny_24)
-            .setContentTitle(time)
-            .setContentText("Hello World!")
+            .setContentTitle(notificationTitle)
+            .setContentText(wear)
 
         notificationManager.notify(NOTIFICATION_ID, builder.build())
     }

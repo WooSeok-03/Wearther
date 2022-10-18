@@ -32,37 +32,9 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         binding.bnvMenu.setupWithNavController(navController)
 
-        weatherViewModel = ViewModelProvider(this).get(WeatherViewModel::class.java)
+        //weatherViewModel = ViewModelProvider(this).get(WeatherViewModel::class.java)
         forecastViewModel = ViewModelProvider(this).get(ForecastViewModel::class.java)
 
-        startAlarm()
-    }
-
-    private fun startAlarm() {
-        val alarmManager: AlarmManager = getSystemService(AppCompatActivity.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, AlarmReceiver::class.java)
-
-        val morningTime = Calendar.getInstance()
-        morningTime.set(Calendar.HOUR_OF_DAY, 8)
-        morningTime.set(Calendar.MINUTE, 0)
-
-        val time = DateFormat.getTimeInstance(DateFormat.SHORT).format(morningTime.time)
-        intent.putExtra("time", time)
-
-        val pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_IMMUTABLE)
-        if (morningTime.before(Calendar.getInstance())) {   // 설정된 시간이 현재시간보다 이전인 경우, +1일
-            morningTime.add(Calendar.DATE, 1)
-        }
-
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, morningTime.timeInMillis, pendingIntent)
-    }
-
-    private fun cancelAlarm() {
-        val alarmManager: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(this, AlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_IMMUTABLE)
-
-        alarmManager.cancel(pendingIntent)
     }
 
 }

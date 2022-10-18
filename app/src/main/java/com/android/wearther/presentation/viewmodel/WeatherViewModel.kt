@@ -1,9 +1,17 @@
 package com.android.wearther.presentation.viewmodel
 
+import android.app.AlarmManager
+import android.app.Application
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.android.wearther.AlarmReceiver
 import com.android.wearther.data.api.RetrofitClient.Companion.getApiService
 import com.android.wearther.data.model.current.Weather
 import retrofit2.*
@@ -11,7 +19,7 @@ import java.text.DateFormat
 import java.util.*
 import kotlin.math.roundToInt
 
-class WeatherViewModel: ViewModel(){
+class WeatherViewModel(application: Application): ViewModel(){
 
     var temperatureData = MutableLiveData<String>()
     val temperature: LiveData<String>
@@ -32,6 +40,19 @@ class WeatherViewModel: ViewModel(){
     var wearData = MutableLiveData<String>()
     val wear : LiveData<String>
     get() = wearData
+
+    val notificationData = MediatorLiveData<String>()
+    init {
+        notificationData.addSource(weather) { value ->
+            notificationData.value = value
+        }
+        notificationData.addSource(temperature) { value ->
+            notificationData.value = value
+        }
+        notificationData.addSource(wear) { value ->
+            notificationData.value = value
+        }
+    }
 
     fun getCurrentWeather() {
         val service = getApiService()
@@ -116,6 +137,38 @@ class WeatherViewModel: ViewModel(){
         return clothes
     }
 
+
+    fun startAlarm(application: Application) {
+        if (weather.value == null || temperature.value == null || wear.value == null) return
+
+        val alarmManager: AlarmManager = application.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(application, AlarmReceiver::class.java)
+
+        val morningTime = Calendar.getInstance()
+        morningTime.set(Calendar.HOUR_OF_DAY, 8)
+        morningTime.set(Calendar.MINUTE, 0)
+
+        Log.i("MYTAG", "start: ${weather.value} / ${temperature.value} / ${wear.value}")
+        intent.putExtra("weather", weather.value)
+        intent.putExtra("temperature", temperature.value)
+        intent.putExtra("wear", wear.value)
+
+
+        val pendingIntent = PendingIntent.getBroadcast(application, 1, intent, PendingIntent.FLAG_IMMUTABLE)
+        if (morningTime.before(Calendar.getInstance())) {   // 설정된 시간이 현재시간보다 이전인 경우, +1일
+            morningTime.add(Calendar.DATE, 1)
+        }
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, morningTime.timeInMillis, pendingIntent)
+    }
+
+    private fun cancelAlarm(application: Application) {
+        val alarmManager: AlarmManager = application.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(application, AlarmReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(application, 1, intent, PendingIntent.FLAG_IMMUTABLE)
+
+        alarmManager.cancel(pendingIntent)
+    }
 
 }
 
