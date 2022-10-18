@@ -3,16 +3,16 @@
 
     <item
         android:id="@+id/weatherFragment"
-        android:icon="@drawable/ic_baseline_wb_sunny_24"
+        android:icon="@drawable/sun"
         android:title="@string/current_weather" />
 
     <item
         android:id="@+id/forecastFragment"
-        android:icon="@drawable/ic_baseline_wb_sunny_24"
+        android:icon="@drawable/week"
         android:title="@string/week_weather" />
 
     <item
         android:id="@+id/wearFragment"
-        android:icon="@drawable/ic_baseline_wb_sunny_24"
+        android:icon="@drawable/wear"
         android:title="@string/recommend_dress" />
 </menu>
