@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.android.wearther.databinding.FragmentWeatherBinding
 import com.android.wearther.presentation.viewmodel.WeatherViewModel
 import com.android.wearther.presentation.viewmodel.WeatherViewModelFactory
+import com.bumptech.glide.Glide
 import java.text.DateFormat
 import java.util.*
 
@@ -42,22 +43,46 @@ class WeatherFragment : Fragment() {
         viewModel = ViewModelProvider(this, factory).get(WeatherViewModel::class.java)
 
         showCurrentWeather()
-        morningNotification(application)
+        morningNotification()
     }
 
     private fun showCurrentWeather() {
         viewModel.getCurrentWeather()
 
         viewModel.weather.observe(viewLifecycleOwner) { binding.tvWeather.text = it }
-        viewModel.temperature.observe(viewLifecycleOwner) { binding.tvTemperature.text = it }
-        viewModel.humidity.observe(viewLifecycleOwner) { binding.tvHumidity.text = it }
-        viewModel.wind.observe(viewLifecycleOwner) { binding.tvWind.text = it }
-        viewModel.wear.observe(viewLifecycleOwner) { binding.tvWear.text = it}
+        viewModel.wear.observe(viewLifecycleOwner) { binding.tvWear.text = it }
+
+        viewModel.temperature.observe(viewLifecycleOwner) {
+            binding.tvTemperature.text = it
+            Glide.with(binding.ivTemperature)
+                .load(R.drawable.icon_temperature)
+                .into(binding.ivTemperature)
+        }
+
+        viewModel.humidity.observe(viewLifecycleOwner) {
+            binding.tvHumidity.text = it
+            Glide.with(binding.ivHumidity)
+                .load(R.drawable.icon_humidity)
+                .into(binding.ivHumidity)
+        }
+
+        viewModel.wind.observe(viewLifecycleOwner) {
+            binding.tvWind.text = it
+            Glide.with(binding.ivWind)
+                .load(R.drawable.icon_wind)
+                .into(binding.ivWind)
+        }
+
+        viewModel.weatherIcon.observe(viewLifecycleOwner) {
+            Glide.with(binding.ivWeather)
+                .load(it)
+                .into(binding.ivWeather)
+        }
     }
 
-    private fun morningNotification(application: Application) {
+    private fun morningNotification() {
         viewModel.notificationData.observe(viewLifecycleOwner) {
-            viewModel.startAlarm(application)   // Notification
+            viewModel.startAlarm()   // Notification
         }
     }
 

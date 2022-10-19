@@ -12,14 +12,20 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.android.wearther.AlarmReceiver
+import com.android.wearther.R
 import com.android.wearther.data.api.RetrofitClient.Companion.getApiService
 import com.android.wearther.data.model.current.Weather
+import com.bumptech.glide.Glide
 import retrofit2.*
 import java.text.DateFormat
 import java.util.*
 import kotlin.math.roundToInt
 
-class WeatherViewModel(application: Application): ViewModel(){
+class WeatherViewModel(private val application: Application): ViewModel(){
+
+    var weatherIconData = MutableLiveData<Int>()
+    val weatherIcon : LiveData<Int>
+    get() = weatherIconData
 
     var temperatureData = MutableLiveData<String>()
     val temperature: LiveData<String>
@@ -73,7 +79,7 @@ class WeatherViewModel(application: Application): ViewModel(){
 
                     // Current Temperature
                     val temperatureValue: Double = response.body()?.main?.temp_max ?: 0.0
-                    temperatureData.postValue(temperatureValue.roundToInt().toString() + " ℃")
+                    temperatureData.postValue(temperatureValue.roundToInt().toString() + "℃")
 
                     // Recommend Dress
                     wearData.postValue(recommendDress(temperatureValue.roundToInt()))
@@ -85,6 +91,20 @@ class WeatherViewModel(application: Application): ViewModel(){
                     // Current Wind
                     val windValue = response.body()?.wind?.speed
                     windData.postValue(windValue.toString() + "m/s")
+
+                    val weatherIconValue = when(weather.value) {
+                        "뇌우" -> R.drawable.icon_thunder
+                        "이슬비" -> R.drawable.icon_drizzle
+                        "비" -> R.drawable.icon_rain
+                        "눈" -> R.drawable.icon_snow
+                        "안개" -> R.drawable.icon_mist
+                        "맑음" -> R.drawable.icon_sunny
+                        "구름조금" -> R.drawable.icon_little_cloud
+                        "구름많음" -> R.drawable.icon_many_cloud
+                        "흐림" -> R.drawable.icon_cloudy
+                        else -> R.drawable.icon_sunny
+                    }
+                    weatherIconData.postValue(weatherIconValue)
 
 
                 } else {
@@ -138,7 +158,7 @@ class WeatherViewModel(application: Application): ViewModel(){
     }
 
 
-    fun startAlarm(application: Application) {
+    fun startAlarm() {
         if (weather.value == null || temperature.value == null || wear.value == null) return
 
         val alarmManager: AlarmManager = application.getSystemService(Context.ALARM_SERVICE) as AlarmManager
