@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".WeatherFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,11 +12,12 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView"
-            android:layout_width="128dp"
-            android:layout_height="128dp"
+            android:id="@+id/iv_weather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
-            android:src="@drawable/sun"
+            android:scaleType="centerInside"
+            tools:src="@drawable/icon_sunny"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -25,12 +27,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:textSize="32sp"
+            android:textSize="48sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatImageView"
+            app:layout_constraintTop_toBottomOf="@+id/iv_weather"
             tools:text="Weather" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"
+            tools:src="@drawable/icon_temperature"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_temperature"
+            app:layout_constraintEnd_toStartOf="@+id/tv_temperature"
+            app:layout_constraintTop_toTopOf="@+id/tv_temperature" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_temperature"
@@ -44,6 +56,16 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_weather"
             tools:text="Temperature" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:scaleType="centerInside"
+            tools:src="@drawable/icon_humidity"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_humidity"
+            app:layout_constraintEnd_toStartOf="@+id/tv_humidity"
+            app:layout_constraintTop_toTopOf="@+id/tv_humidity" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_humidity"
@@ -56,6 +78,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_temperature"
             tools:text="Humidity" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_wind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:scaleType="centerInside"
+            tools:src="@drawable/icon_wind"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_wind"
+            app:layout_constraintEnd_toStartOf="@+id/tv_wind"
+            app:layout_constraintTop_toTopOf="@+id/tv_wind" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_wind"
