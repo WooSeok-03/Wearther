@@ -16,6 +16,7 @@ import kotlin.math.roundToInt
 class ForecastAdapter: RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>() {
     inner class ForecastViewHolder(private val binding: ListItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(week: Week) {
+
             val date = week.dt_txt.replace(" 12:00:00", "")
             binding.tvDate.text = date
 
@@ -57,8 +58,8 @@ class ForecastAdapter: RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>(
                 val intent = Intent(it.context, WeatherInfoActivity::class.java)
                 intent.putExtra("date", date)
                 intent.putExtra("weather", weather)
-                //intent.putExtra("temperature", week.main.temp.roundToInt())
                 intent.putExtra("temperature", temperature)
+                intent.putExtra("icon", weatherIcon)
                 ContextCompat.startActivity(it.context, intent, null)
             }
         }
