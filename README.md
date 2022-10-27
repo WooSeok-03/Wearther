@@ -1,4 +1,4 @@
-#🌤👕 Wearther ( Wear + Weather )
+# 🌤👕 Wearther ( Wear + Weather )
 
 >**[자세한 설명](https://www.notion.so/Wearther-2f7f9cc7003448bd9e16218b6443415e)**
 
