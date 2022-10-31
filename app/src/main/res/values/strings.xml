@@ -4,4 +4,6 @@
     <string name="current_weather">현재 날씨</string>
     <string name="week_weather">주간 날씨</string>
     <string name="recommend_dress">추천 복장</string>
+
+    <string name="temperature_value">%.0fC</string>
 </resources>
