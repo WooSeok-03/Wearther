@@ -5,5 +5,7 @@
     <string name="week_weather">주간 날씨</string>
     <string name="recommend_dress">추천 복장</string>
 
-    <string name="temperature_value">%.0fC</string>
+    <string name="temperature_value">%.0f℃</string>
+    <string name="humidity_value">%d%%</string>
+    <string name="wind_value">%.0fm/s</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.android.wearther
 
 import android.app.AlarmManager
-import android.app.Application
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -12,8 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isInvisible
 import androidx.lifecycle.ViewModelProvider
+import com.android.wearther.data.model.current.WeatherInfo
 import com.android.wearther.databinding.FragmentWeatherBinding
-import com.android.wearther.presentation.viewmodel.WeatherInfo
 import com.android.wearther.presentation.viewmodel.WeatherViewModel
 import com.bumptech.glide.Glide
 import java.util.*
@@ -43,8 +42,8 @@ class WeatherFragment : Fragment() {
         viewModel.weatherInfo.observe(viewLifecycleOwner) {
             binding.tvWeather.text = it.weather
             binding.tvTemperature.text = getString(R.string.temperature_value, it.temperature)
-            binding.tvHumidity.text = "${it.humidity}"
-            binding.tvWind.text = "${it.wind}"
+            binding.tvHumidity.text = getString(R.string.humidity_value, it.humidity)
+            binding.tvWind.text = getString(R.string.wind_value, it.wind)
 
             val resourceId = when(it.weather) {
                 "뇌우" -> R.drawable.icon_thunder
@@ -60,7 +59,7 @@ class WeatherFragment : Fragment() {
             }
 
             Glide.with(this).load(resourceId).into(binding.ivWeather)
-            binding.weatherImages.isInvisible = true
+            binding.weatherImages.visibility = View.VISIBLE
 
             morningNotification(it)
         }
