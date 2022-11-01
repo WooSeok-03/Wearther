@@ -28,7 +28,7 @@ class WeatherViewModel : ViewModel() {
                     val weatherList = response.body()?.weather ?: return
 
                     val weatherValue = weatherList.firstOrNull()?.id ?: return
-                    val temperature: Double = response.body()?.main?.temp_max ?: 0.0
+                    val temperature = response.body()?.main?.temp ?: 0.0
                     val wearInfo = recommendDress(temperature.roundToInt())
                     val humidityValue = response.body()?.main?.humidity ?: 0
                     val windValue = response.body()?.wind?.speed ?: 0.0

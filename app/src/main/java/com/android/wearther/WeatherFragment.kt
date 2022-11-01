@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isInvisible
 import androidx.lifecycle.ViewModelProvider
 import com.android.wearther.data.model.current.WeatherInfo
 import com.android.wearther.databinding.FragmentWeatherBinding
@@ -44,6 +43,7 @@ class WeatherFragment : Fragment() {
             binding.tvTemperature.text = getString(R.string.temperature_value, it.temperature)
             binding.tvHumidity.text = getString(R.string.humidity_value, it.humidity)
             binding.tvWind.text = getString(R.string.wind_value, it.wind)
+            binding.tvWear.text = it.wear
 
             val resourceId = when(it.weather) {
                 "뇌우" -> R.drawable.icon_thunder
