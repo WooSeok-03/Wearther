@@ -4,8 +4,7 @@ import com.android.wearther.BuildConfig
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class
-RetrofitClient {
+class RetrofitClient {
     companion object {
         private val retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
