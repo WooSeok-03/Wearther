@@ -20,8 +20,6 @@ import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
-    lateinit var weatherViewModel: WeatherViewModel
-    lateinit var forecastViewModel: ForecastViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +28,6 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
         val navController = navHostFragment.navController
         binding.bnvMenu.setupWithNavController(navController)
-
-        //weatherViewModel = ViewModelProvider(this).get(WeatherViewModel::class.java)
-        forecastViewModel = ViewModelProvider(this).get(ForecastViewModel::class.java)
 
         setContentView(binding.root)
     }
