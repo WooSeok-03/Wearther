@@ -10,8 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.android.wearther.data.model.WeatherConditions
 import com.android.wearther.data.model.current.WeatherInfo
 import com.android.wearther.databinding.FragmentWeatherBinding
+import com.android.wearther.presentation.Util
 import com.android.wearther.presentation.viewmodel.WeatherViewModel
 import com.bumptech.glide.Glide
 import java.util.*
@@ -39,24 +41,13 @@ class WeatherFragment : Fragment() {
         viewModel.getCurrentWeather()
 
         viewModel.weatherInfo.observe(viewLifecycleOwner) {
-            binding.tvWeather.text = it.weather
+            binding.tvWeather.text = it.weather.toString()
             binding.tvTemperature.text = getString(R.string.temperature_value, it.temperature)
             binding.tvHumidity.text = getString(R.string.humidity_value, it.humidity)
             binding.tvWind.text = getString(R.string.wind_value, it.wind)
             binding.tvWear.text = it.wear
 
-            val resourceId = when(it.weather) {
-                "뇌우" -> R.drawable.icon_thunder
-                "이슬비" -> R.drawable.icon_drizzle
-                "비" -> R.drawable.icon_rain
-                "눈" -> R.drawable.icon_snow
-                "안개" -> R.drawable.icon_mist
-                "맑음" -> R.drawable.icon_sunny
-                "구름조금" -> R.drawable.icon_little_cloud
-                "구름많음" -> R.drawable.icon_many_cloud
-                "흐림" -> R.drawable.icon_cloudy
-                else -> R.drawable.icon_sunny
-            }
+            val resourceId = Util.getIconFromWeather(it.weather)
 
             Glide.with(this).load(resourceId).into(binding.ivWeather)
             binding.weatherImages.visibility = View.VISIBLE
